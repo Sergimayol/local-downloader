@@ -3,23 +3,38 @@
 set -xe
 
 # Check if node is installed
-if ! command -v node &> /dev/null
+if
+    ! command -v node &
+    >/dev/null
 then
     echo "Node is not installed"
     exit
 fi
 
 # Check if npm is installed
-if ! command -v npm &> /dev/null
+if
+    ! command -v npm &
+    >/dev/null
 then
     echo "Npm is not installed"
     exit
 fi
 
 # Check if python3 is installed
-if ! command -v python3 &> /dev/null
+if
+    ! command -v python3 &
+    >/dev/null
 then
     echo "Python3 is not installed"
+    exit
+fi
+
+# Check if ffmpeg is installed
+if
+    ! command -v ffmpeg &
+    >/dev/null
+then
+    echo "Ffmpeg is not installed"
     exit
 fi
 
