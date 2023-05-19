@@ -73,7 +73,7 @@ export async function GET(request: Request) {
     }
     const filePath = path.join(process.cwd(), "tmp", name);
     const fileStream = fs.createReadStream(filePath);
-    const response = new Response(fileStream, {
+    const response = new Response(fileStream as any, {
         headers: {
             "content-type": "audio/mpeg",
             "Content-Disposition": `attachment; filename=${filePath}`,
