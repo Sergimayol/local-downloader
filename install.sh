@@ -48,8 +48,8 @@ npm run build
 if [ "$1" = "-v" ]; then
     echo "Creating a virtual environment"
     # Create a virtual environment
-    python3 -m venv .venv
+    python -m venv .venv
 fi
 
 # Install script dependencies
-python3 -m pip install -r requirements.txt
+python -m pip install -r requirements.txt
