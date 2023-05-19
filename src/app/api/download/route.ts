@@ -8,7 +8,7 @@ export async function POST(request: Request) {
 
     // Del all the .mp3 files in the tmp folder
     await new Promise((resolve) => {
-        exec(`rm tmp/*.mp3`, (err, stdout, stderr) => {
+        exec(`rm ./public/tmp/*.mp3`, (err, stdout, stderr) => {
             if (err) {
                 console.log(err);
                 resolve(false);
@@ -40,7 +40,7 @@ export async function POST(request: Request) {
 
     const videoTitle = await new Promise((resolve) => {
         // Get from tmp folder all the files ending with .mp3
-        exec(`ls tmp/*.mp3`, (err, stdout, stderr) => {
+        exec(`ls ./public/tmp/*.mp3`, (err, stdout, stderr) => {
             if (err) {
                 console.log(err);
                 resolve(false);
