@@ -1,3 +1,5 @@
+import fs from "fs";
+import path from "path";
 import { exec } from "child_process";
 
 export async function POST(request: Request) {
@@ -8,7 +10,7 @@ export async function POST(request: Request) {
 
     // Del all the .mp3 files in the tmp folder
     await new Promise((resolve) => {
-        exec(`rm ./public/tmp/*.mp3`, (err, stdout, stderr) => {
+        exec(`rm tmp/*.mp3`, (err, stdout, stderr) => {
             if (err) {
                 console.log(err);
                 resolve(false);
@@ -40,7 +42,7 @@ export async function POST(request: Request) {
 
     const videoTitle = await new Promise((resolve) => {
         // Get from tmp folder all the files ending with .mp3
-        exec(`ls ./public/tmp/*.mp3`, (err, stdout, stderr) => {
+        exec(`ls tmp/*.mp3`, (err, stdout, stderr) => {
             if (err) {
                 console.log(err);
                 resolve(false);
@@ -59,4 +61,23 @@ export async function POST(request: Request) {
 
 function getIdFromVideoUrl(url: string) {
     return new URL(url).searchParams.get("v");
+}
+
+export async function GET(request: Request) {
+    const name = new URL(request.url).searchParams.get("n");
+    console.log(name);
+    if (!name) {
+        return new Response(JSON.stringify({ message: "Error" }), {
+            headers: { "content-type": "application/json" },
+        });
+    }
+    const filePath = path.join(process.cwd(), "tmp", name);
+    const fileStream = fs.createReadStream(filePath);
+    const response = new Response(fileStream, {
+        headers: {
+            "content-type": "audio/mpeg",
+            "Content-Disposition": `attachment; filename=${filePath}`,
+        },
+    });
+    return response;
 }

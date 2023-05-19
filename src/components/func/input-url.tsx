@@ -65,7 +65,7 @@ export default function InputUrl() {
             </div>
             {video && (
                 <div className="flex flex-col justify-center items-center">
-                    <a href={`/tmp/${video}`} download>
+                    <a href={`/api/download?n=${video}`}>
                         <Button variant="default" size="sm" className="w-full">
                             Descargar
                         </Button>
