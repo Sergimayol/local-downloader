@@ -13,8 +13,7 @@ fi
 
 # Check if npm is installed
 if
-    ! command -v npm &
-    >/dev/null
+    ! command -v npm
 then
     echo "Npm is not installed"
     exit
@@ -22,8 +21,7 @@ fi
 
 # Check if python3 is installed
 if
-    ! command -v python3 &
-    >/dev/null
+    ! command -v python3
 then
     echo "Python3 is not installed"
     exit
@@ -31,8 +29,7 @@ fi
 
 # Check if ffmpeg is installed
 if
-    ! command -v ffmpeg &
-    >/dev/null
+    ! command -v ffmpeg
 then
     echo "Ffmpeg is not installed"
     exit
