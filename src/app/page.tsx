@@ -1,10 +1,10 @@
-import { Input } from "@/components/ui/input";
+import InputUrl from "@/components/func/input-url";
 
 export default function Home() {
     return (
         <div>
-            <h1>Home</h1>
-            <Input type="url" placeholder="Itroduce la URL del video" />
+            <h1 className="my-2 text-center">Local Youtube Video Downloader</h1>
+            <InputUrl />
         </div>
     );
 }
