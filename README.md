@@ -1,34 +1,19 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Local audio downloader
 
-## Getting Started
+This is a simple project to download audio from a youtube video and convert it to mp3 using [yt-dlp](https://github.com/yt-dlp/yt-dlp), [ffmpeg](https://ffmpeg.org/) and [nextjs 13](https://nextjs.org/).
 
-First, run the development server:
+## How to use
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+1. Clone this repository
+2. Install dependencies with `yarn install` or `npm install` and `pip install -r requirements.txt` (you may need to install ffmpeg manually and depending on your system also yt-dlp)
+3. Build the project with `yarn build` or `npm run build`
+4. Run the project with `yarn start` or `npm run start`
+5. Open your browser and go to `http://localhost:3000`
+6. Paste the link of the video you want to download and click on the download button
+7. Wait for the download to finish and enjoy your music!
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+> Note: That this project is meant to be used locally, so it doesn't have any kind of security, so don't use it in a public server. Also, is thought to be used in a Linux system, so it may not work in other systems. Or you may need to change the download-audio script in the `scripts` folder.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## License
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
