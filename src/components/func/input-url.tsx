@@ -10,6 +10,38 @@ export default function InputUrl() {
     const [feedback, setFeedback] = useState<string>("");
     const [feedbackType, setFeedbackType] = useState<"error" | "success">();
     const [video, setVideo] = useState<string>("");
+
+    const download = () => {
+        setVideo("");
+        setFeedback("");
+        setFeedbackType(undefined);
+        const url =
+            document.querySelector<HTMLInputElement>("input[type=url]")?.value;
+        if (!url) {
+            setFeedbackType("error");
+            setFeedback("Introduce una URL");
+            return;
+        }
+        setFeedbackType("success");
+        setFeedback("URL introducida correctamente");
+        fetch("/api/download", {
+            method: "POST",
+            body: JSON.stringify({ url }),
+        })
+            .then((res) => res.json())
+            .then((res) => {
+                console.log(res);
+                if (res.error) {
+                    setFeedbackType("error");
+                    setFeedback(res.error);
+                    setVideo("");
+                    return;
+                }
+                setVideo(res.video);
+            })
+            .catch(console.error);
+    };
+
     return (
         <div>
             <label
@@ -23,35 +55,7 @@ export default function InputUrl() {
                 variant="default"
                 size="sm"
                 className="w-full my-2"
-                onClick={() => {
-                    const url =
-                        document.querySelector<HTMLInputElement>(
-                            "input[type=url]"
-                        )?.value;
-                    if (!url) {
-                        setFeedbackType("error");
-                        setFeedback("Introduce una URL");
-                        return;
-                    }
-                    setFeedbackType("success");
-                    setFeedback("URL introducida correctamente");
-                    fetch("/api/download", {
-                        method: "POST",
-                        body: JSON.stringify({ url }),
-                    })
-                        .then((res) => res.json())
-                        .then((res) => {
-                            console.log(res);
-                            if (res.error) {
-                                setFeedbackType("error");
-                                setFeedback(res.error);
-                                setVideo("");
-                                return;
-                            }
-                            setVideo(res.video);
-                        })
-                        .catch(console.error);
-                }}
+                onClick={download}
             >
                 Introducir
             </Button>
@@ -61,7 +65,7 @@ export default function InputUrl() {
             </div>
             {video && (
                 <div className="flex flex-col justify-center items-center">
-                    <a href={`./tmp/${video}`} download>
+                    <a href={`/tmp/${video}`} download>
                         <Button variant="default" size="sm" className="w-full">
                             Descargar
                         </Button>
