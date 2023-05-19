@@ -10,11 +10,13 @@ export default function InputUrl() {
     const [feedback, setFeedback] = useState<string>("");
     const [feedbackType, setFeedbackType] = useState<"error" | "success">();
     const [video, setVideo] = useState<string>("");
+    const [loading, setLoading] = useState<boolean>(false);
 
     const download = () => {
         setVideo("");
         setFeedback("");
         setFeedbackType(undefined);
+        setLoading(true);
         const url =
             document.querySelector<HTMLInputElement>("input[type=url]")?.value;
         if (!url) {
@@ -40,6 +42,7 @@ export default function InputUrl() {
                 setVideo(res.video);
             })
             .catch(console.error);
+        setLoading(false);
     };
 
     return (
@@ -59,10 +62,21 @@ export default function InputUrl() {
             >
                 Introducir
             </Button>
-            <div className="flex flex-row justify-center items-center">
-                {feedbackType === "error" ? <CrossIcon /> : <CheckIcon />}
-                <p className="text-center text-sm text-gray-500">{feedback}</p>
-            </div>
+            {feedback && feedbackType && (
+                <div className="flex flex-row justify-center items-center">
+                    {feedbackType === "error" ? <CrossIcon /> : <CheckIcon />}
+                    <p className="text-center text-sm text-gray-500">
+                        {feedback}
+                    </p>
+                </div>
+            )}
+            {loading && (
+                <div className="flex flex-row justify-center items-center">
+                    <p className="text-center text-sm text-gray-500">
+                        Cargando...
+                    </p>
+                </div>
+            )}
             {video && (
                 <div className="flex flex-col justify-center items-center">
                     <a href={`/api/download?n=${video}`}>
