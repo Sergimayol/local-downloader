@@ -9,7 +9,7 @@ This is a simple project to download audio from a youtube video and convert it t
 
 ## How to use
 
-1. Clone this repository
+1. Clone this repository (`git clone https://github.com/Sergimayol/local-downloader.git`)
 2. Install the requirements using `pip install -r requirements.txt`
 3. Run the app using `streamlit run src/app.py` or ` python -m streamlit run src/app.py`
 
