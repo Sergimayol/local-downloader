@@ -31,15 +31,15 @@ if __name__ == "__main__":
 
         remove_possible_other_files(OUTPUT_PATH, files_to_keep=[TMP_KEEP_FILE])
 
-        info = st.info("Descargando audio...")
+        info = st.info("Preparando la descarga...")
         status = download_audio(url, OUTPUT_PATH)
         if not status:
             info.empty()
-            st.error("Error al descargar el audio")
+            st.error("Error al preparar la descarga")
             st.stop()
 
         info.empty()
-        st.success("Descarga completada")
+        st.success("El audio se ha procesado correctamente, listo para descargar!")
 
         audio_name = get_audio_name(OUTPUT_PATH)
         if DEBUG: print(f"[DEBUG]: {audio_name=}")
@@ -57,7 +57,7 @@ if __name__ == "__main__":
 
         # Download button
         if st.download_button(
-            label="Descargar archivo",
+            label="Descargar audio",
             data=data,
             file_name=audio_name,
             mime="audio/mp3",
